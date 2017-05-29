@@ -29,6 +29,7 @@
     "eslint-watch": "^2.1.14",
     "express": "4.15.2",
     "nunjucks": "^3.0.0",
+    "nsp": "^2.4.0",
     "raven": "1.2.0",
     "supervisor": "0.12.0"
   }
