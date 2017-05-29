@@ -23,6 +23,10 @@
   "homepage": "https://github.com/Turistforeningen/var#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb-base": "^7.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-watch": "^2.1.14",
     "express": "4.15.2",
     "nunjucks": "^3.0.0",
     "raven": "1.2.0",
