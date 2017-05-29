@@ -1,0 +1,28 @@
+secrets:
+  image: 'turistforeningen/var-secrets:v1'
+  tags:
+    - app
+  volumes:
+    - /secrets
+var-node:
+  autoredeploy: true
+  environment:
+    - FORCE_SSL=true
+    - HSTS_MAX_AGE=31536000
+    - NODE_ENV=production
+    - STATSD_HOST=statsd
+    - STATSD_PORT=8125
+    - 'VIRTUAL_HOST=http://frivillig.app.dnt.no*,https://frivillig.app.dnt.no*'
+    - VIRTUAL_HOST_WEIGHT=20
+    - VIRTUAL_PATH=/
+    - VIRTUAL_PORT=8080
+  expose:
+    - '8080'
+  image: 'turistforeningen/var'
+  links:
+    - 'statsd.statsd-librato:statsd'
+  restart: always
+  tags:
+    - app
+  volumes_from:
+    - 'secrets:ro'
