@@ -16,6 +16,9 @@ RUN yarn install
 # Copy the application source code and run the optional build step.
 COPY . /usr/src/app
 
+# Build project
+RUN npm run build
+
 # Change the ownership of the application code and switch to the unprivileged
 # user.
 RUN chown -R app:app /usr/src/app

@@ -26,7 +26,10 @@ module.exports.nunjucks = nunjucks.configure('templates', {
 });
 
 router.get('/', (req, res, next) => {
-  res.render('index.html');
+  res.render('app.html', {
+    assets: process.env.NODE_ENV === 'production' ? '/assets' : 'http://frivillig-dev.app.dnt.local/assets',
+    environment: process.env.NODE_ENV,
+  });
 });
 
 // Sentry Error Handling

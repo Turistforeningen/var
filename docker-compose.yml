@@ -22,3 +22,22 @@ services:
       - VIRTUAL_PORT=8080
       - VIRTUAL_PATH=/
     command: npm start
+  webpack:
+    image: node:7-alpine
+    network_mode: 'bridge'
+    ports:
+      - '3000'
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      - NODE_ENV=development
+      - NPM_CONFIG_LOGLEVEL=info
+      - NPM_CONFIG_PROGRESS=false
+      - NPM_CONFIG_SPIN=false
+      - VIRTUAL_HOST=frivillig-dev.app.dnt.local
+      - VIRTUAL_PORT=3000
+    logging:
+      options:
+        max-size: "500k"
+    command: 'npm run webpack:serve'
