@@ -12,7 +12,7 @@ const appContainer = document.getElementById('app');
 const isProduction = appContainer.dataset.environment === 'production';
 
 if (isProduction) {
-  Raven.config('https://b51f3aefd11d4871bac2f0e212a839f8@sentry.io/160529').install();
+  Raven.config('https://06b9fcd4ece146d7ada1f633f07c7d00@sentry.io/172560').install();
 }
 
 const render = (Component) => {
