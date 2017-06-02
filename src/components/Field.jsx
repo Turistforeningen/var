@@ -21,14 +21,14 @@ class Field extends Component {
   }
 
   render() {
-    const {form, label, name} = this.props;
+    const {form, label, name, required} = this.props;
     const {value} = this.state;
     const errors = form.errors[name];
     const touched = form.touched[name] === true;
     const validated = form.validated === true;
 
     return (
-      <div className="required">
+      <div className={required ? 'required' : ''}>
         <label>
           {label}
         </label>
@@ -53,6 +53,7 @@ const mapStateToProps = (state, ownProps) => ({
   label: ownProps.label,
   name: ownProps.name,
   value: ownProps.value,
+  required: !!ownProps.required,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -103,26 +103,31 @@ class Form extends Component {
             label="Fornavn"
             name="firstName"
             value={form.firstName || ''}
+            required
           />
           <Field
             label="Etternavn"
             name="lastName"
             value={form.lastName || ''}
+            required
           />
           <Field
             label="Adresse"
             name="address"
             value={form.address || ''}
+            required
           />
           <Field
             label="Postnummer"
             name="zipcode"
             value={form.zipcode || ''}
+            required
           />
           <Field
             label="Sted"
             name="city"
             value={form.city || ''}
+            required
           />
         </fieldset>
 
@@ -187,12 +192,13 @@ class Form extends Component {
             label="Telefon"
             name="phone"
             value={form.phone || ''}
+            required
           />
           <Field
-            required
             label="Epost"
             name="email"
             value={form.email || ''}
+            required
           />
         </fieldset>
         {

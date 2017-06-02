@@ -1,0 +1,13 @@
+$dnt-primary: #d82d20;
+
+label {
+  cursor: pointer;
+}
+
+.required {
+  label:after {
+    content: '*';
+    color: $dnt-primary;
+    font-weight: bold;
+  }
+}
