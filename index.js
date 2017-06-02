@@ -32,6 +32,10 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/registrer', (req, res, next) => {
+  res.json({success: true});
+});
+
 // Sentry Error Handling
 if (process.env.NODE_ENV === 'production') {
   router.use(raven.middleware.express.requestHandler(sentry));
