@@ -6,6 +6,49 @@ import {setField, sendRegistration} from '../actions/index.js';
 
 import Field from './Field.jsx';
 
+const types = [
+  {
+    label: 'Hyttedugnad',
+    name: 'hyttedugnad',
+    description: 'Lorem',
+  },
+  {
+    label: 'Hyttevakt',
+    name: 'hyttevakt',
+    description: 'Lorem',
+  },
+  {
+    label: 'Stimerking',
+    name: 'stimerking',
+    description: 'Lorem',
+  },
+  {
+    label: 'Turledelse og -instruksjon',
+    name: 'turledelse-og-instruksjon',
+    description: 'Lorem',
+  },
+  {
+    label: 'Frivillig på arrangement',
+    name: 'frivillig-pa-arrangement',
+    description: 'Lorem',
+  },
+  {
+    label: 'Informasjons- og kommunikasjonsarbeid',
+    name: 'info-komm-arbeid',
+    description: 'Lorem',
+  },
+  {
+    label: 'Verv og organisasjonsarbeid',
+    name: 'verv-org-arbeid',
+    description: 'Lorem',
+  },
+  {
+    label: 'Annet',
+    name: 'annet',
+    description: 'Lorem',
+  },
+];
+
 class Form extends Component {
   @autobind
   handleFirstNameChange(e) {
@@ -23,8 +66,30 @@ class Form extends Component {
   }
 
   @autobind
+  handleActivitiesChange(e) {
+    const activities = [...this.props.form.data.activities || []];
+
+    if (e.target.checked) {
+      this.props.setField('activities', [...activities, e.target.value]);
+    } else {
+      this.props.setField('activities', activities.filter(activity => activity !== e.target.value));
+    }
+  }
+
+  @autobind
+  handleWhereChange(e) {
+    const where = [...this.props.form.data.where || []];
+
+    if (e.target.checked) {
+      this.props.setField('where', [...where, e.target.value]);
+    } else {
+      this.props.setField('where', where.filter(place => place !== e.target.value));
+    }
+  }
+
+  @autobind
   handleRegisterClick(e) {
-    this.props.sendRegistration();
+    this.props.sendRegistration(this.props.form);
   }
 
   render() {
@@ -44,44 +109,67 @@ class Form extends Component {
             name="lastName"
             value={form.lastName || ''}
           />
-          <div className="required">
-            <label>
-              Adresse
-            </label>
-            <input value={form.address || ''} onChange={this.handleAddressChange} />
-          </div>
-          <div className="required">
-            <label>
-              Postnummer
-            </label>
-            <input />
-          </div>
-          <div className="required">
-            <label>
-              Sted
-            </label>
-            <input />
-          </div>
+          <Field
+            label="Adresse"
+            name="address"
+            value={form.address || ''}
+          />
+          <Field
+            label="Postnummer"
+            name="zipcode"
+            value={form.zipcode || ''}
+          />
+          <Field
+            label="Sted"
+            name="city"
+            value={form.city || ''}
+          />
         </fieldset>
 
         <fieldset>
-          <legend>Hva vil du gjøre?</legend>
+          <legend>Aktiviteter</legend>
+          <h2>Hva kan være aktuelt for deg?</h2>
+          {types.map(type => (
+            <div key={type.name}>
+              <input
+                type="checkbox"
+                name="type"
+                value={type.name}
+                onChange={this.handleActivitiesChange}
+                checked={!!(this.props.form.data.activities || [])
+                  .find(activity => activity === type.name)}
+              />
+              <label>
+                {type.label}
+              </label>
+            </div>
+          ))}
+
+          <h2>Hvor ønsker du å gjøre en innsats?</h2>
           <div>
-            <input type="checkbox" />
-            <label>
-              Hyttedugnad
-            </label>
+            <input
+              type="checkbox"
+              name="where"
+              value="nærmiljø"
+              onChange={this.handleWhereChange}
+              checked={!!(this.props.form.data.where || [])
+                .find(place => place === 'nærmiljø')}
+            />
+            <label>I mitt nærmiljø</label>
           </div>
           <div>
-            <input type="checkbox" />
-            <label>
-              Hyttevakt
-            </label>
+            <input
+              type="checkbox"
+              name="where"
+              value="fjellet"
+              onChange={this.handleWhereChange}
+              checked={!!(this.props.form.data.where || [])
+                .find(place => place === 'fjellet')}
+            />
+            <label>På fjellet</label>
           </div>
-          <div>
-            <input type="checkbox" />
-            <label>Annet</label>
-          </div>
+
+          <h2>Kommentarer?</h2>
           <div>
             <label>Kommentar</label>
             <textarea></textarea>
@@ -90,25 +178,30 @@ class Form extends Component {
 
         <fieldset>
           <legend>Ekstra informasjon</legend>
-          <div className="required">
-            <label>
-              Fødselsdato
-            </label>
-            <input value={form.dob || ''} onChange={this.handleDobChange} />
-          </div>
-          <div className="required">
-            <label>
-              Telefon
-            </label>
-            <input value={form.phone || ''} onChange={this.handlePhoneChange} />
-          </div>
-          <div className="required">
-            <label>
-              Epost
-            </label>
-            <input value={form.email || ''} onChange={this.handlePhoneChange} />
-          </div>
+          <Field
+            label="Fødselsdato"
+            name="dob"
+            value={form.dob || ''}
+          />
+          <Field
+            label="Telefon"
+            name="phone"
+            value={form.phone || ''}
+          />
+          <Field
+            required
+            label="Epost"
+            name="email"
+            value={form.email || ''}
+          />
         </fieldset>
+        {
+          !!Object.keys(form.errors).length &&
+          <div>
+            Før skjemaet kan sendes inn, må du gå rette opp i feltene som er markert
+            med feil
+          </div>
+        }
 
         <button type="button" onClick={this.handleRegisterClick}>Registrer meg</button>
       </form>
@@ -121,12 +214,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setField: function(field, value) {
+  setField: function dispatchSetField(field, value) {
     dispatch(setField(field, value));
   },
-  sendRegistration: function() {
+  sendRegistration: function dispatchSendRegistration() {
     dispatch(sendRegistration());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {registrationValidator} from '../validators/index.js';
 
-import {RECEIVE_SEND, REQUEST_SEND, SET_FIELD} from '../actions/index.js';
+import {RECEIVE_SEND, REQUEST_SEND, SET_FIELD, SET_FORM_VALIDATION} from '../actions/index.js';
 
 function appReducer(state = {isSending: false, isSent: false}, action) {
   switch (action.type) {
@@ -20,30 +20,19 @@ function appReducer(state = {isSending: false, isSent: false}, action) {
 
     default:
       return {
-        types: [
-          {
-            name: 'Hyttedugnad',
-            description: 'Lorem',
-            selected: false,
-          },
-          {
-            name: 'Hyttevakt',
-            description: 'Lorem',
-            selected: false,
-          }
-        ]
+        ...state,
       };
   }
 }
 
-function formReducer(state = {warnings: {}, errors: {}, touched: {}}, action) {
+function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, action) {
+  const data = {
+    ...state.data,
+    [action.field]: action.value,
+  };
+
   switch (action.type) {
     case SET_FIELD:
-      const data = {
-        ...state.data,
-        [action.field]: action.value,
-      };
-
       return {
         ...state,
         data: data,
@@ -54,16 +43,12 @@ function formReducer(state = {warnings: {}, errors: {}, touched: {}}, action) {
         },
       };
 
-    case 'ADD_ACTIVITY':
+    case SET_FORM_VALIDATION:
       return {
         ...state,
-        activities: [...state.activities, action.activity]
-      };
-
-    case 'REMOVE_ACTIVITY':
-      return {
-        ...state,
-        activities: state.activities.filter(activity => activity !== action.activity),
+        data: data,
+        errors: registrationValidator(data).errors,
+        validated: true,
       };
 
     default:

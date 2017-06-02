@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {autobind} from 'core-decorators';
 
-import {setField} from '../actions/index.js';
+import {setField, validateForm} from '../actions/index.js';
 
 class Field extends Component {
   constructor(props) {
@@ -25,6 +25,7 @@ class Field extends Component {
     const {value} = this.state;
     const errors = form.errors[name];
     const touched = form.touched[name] === true;
+    const validated = form.validated === true;
 
     return (
       <div className="required">
@@ -37,7 +38,7 @@ class Field extends Component {
           onBlur={this.handleInputBlur}
         />
         {
-          !!errors && !!touched &&
+          !!errors && (!!touched || !!validated) &&
           <div className="errors">
             {errors}
           </div>
@@ -57,6 +58,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   setField: function dispatchSetField(field, value) {
     dispatch(setField(field, value));
+  },
+  validateForm: function dispatchValidateForm() {
+    dispatch(validateForm());
   },
 });
 

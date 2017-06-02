@@ -2,22 +2,37 @@ export const registrationValidator = (data) => {
   const errors = {};
   const warnings = {};
 
-  Object.keys(data).forEach((field) => {
-    switch (field) {
-      case 'firstName':
-        if (!data.firstName) {
-          errors.firstName = 'Fornavn er påkrevd';
-        }
-        break;
-      case 'lastName':
-        if (!data.lastName) {
-          errors.lastName = 'Etternavn er påkrevd';
-        }
-        break;
-      default:
-        break;
-    }
-  });
+  if (!data.firstName) {
+    errors.firstName = 'Fornavn må fylles ut';
+  }
+
+  if (!data.lastName) {
+    errors.lastName = 'Etternavn må fylles ut';
+  }
+
+  if (!data.zipcode) {
+    errors.zipcode = 'Postnummer må fylles ut';
+  }
+
+  if (!data.city) {
+    errors.city = 'Sted må fylles ut';
+  }
+
+  if (!data.activities || !data.activities.length) {
+    errors.activities = 'Du må velge minst en aktivitet';
+  }
+
+  if (!data.where || !data.where.length) {
+    errors.where = 'Du må velge minst ett sted';
+  }
+
+  if (!data.phone) {
+    errors.phone = 'Telefonnummer må fylles ut';
+  }
+
+  if (!data.email) {
+    errors.email = 'Epost må fylles ut';
+  }
 
   return {errors, warnings};
 };
