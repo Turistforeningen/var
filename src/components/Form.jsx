@@ -98,7 +98,7 @@ class Form extends Component {
     return (
       <form>
         <fieldset>
-          <legend>Navn og adresse</legend>
+          <h2>Navn og adresse</h2>
           <Field
             label="Fornavn"
             name="firstName"
@@ -115,7 +115,6 @@ class Form extends Component {
             label="Adresse"
             name="address"
             value={form.address || ''}
-            required
           />
           <Field
             label="Postnummer"
@@ -132,20 +131,18 @@ class Form extends Component {
         </fieldset>
 
         <fieldset>
-          <legend>Aktiviteter</legend>
-          <h2>Hva kan være aktuelt for deg?</h2>
+          <h2>Hva vil du gjøre?</h2>
           {types.map(type => (
             <div key={type.name}>
-              <input
-                type="checkbox"
-                name="type"
-                id={type.name}
-                value={type.name}
-                onChange={this.handleActivitiesChange}
-                checked={!!(this.props.form.data.activities || [])
-                  .find(activity => activity === type.name)}
-              />
-              <label htmlFor={type.name}>
+              <label>
+                <input
+                  type="checkbox"
+                  name="type"
+                  value={type.name}
+                  onChange={this.handleActivitiesChange}
+                  checked={!!(this.props.form.data.activities || [])
+                    .find(activity => activity === type.name)}
+                />
                 {type.label}
               </label>
             </div>
@@ -175,15 +172,14 @@ class Form extends Component {
             <label>På fjellet</label>
           </div>
 
-          <h2>Kommentarer?</h2>
+          <h2>Kommentarer</h2>
           <div>
-            <label>Kommentar</label>
             <textarea></textarea>
           </div>
         </fieldset>
 
         <fieldset>
-          <legend>Ekstra informasjon</legend>
+          <h2>Kontaktinformasjon</h2>
           <Field
             label="Fødselsdato"
             name="dob"
@@ -205,7 +201,7 @@ class Form extends Component {
         {
           !!Object.keys(form.errors).length &&
           <div>
-            Før skjemaet kan sendes inn, må du gå rette opp i feltene som er markert
+            Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
             med feil
           </div>
         }

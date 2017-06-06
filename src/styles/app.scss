@@ -1,13 +1,158 @@
+// Variables
+
+// Colors
+
 $dnt-primary: #d82d20;
+
+// Fonts
+
+@font-face {
+  font-family: "DTL Nobel";
+  src: url('../assets/fonts/dtl-nobel.eot');
+  src: url('../assets/fonts/dtl-nobel.eot?#iefix') format('embedded-opentype'),
+       url('../assets/fonts/dtl-nobel.woff') format('woff'),
+       url('../assets/fonts/dtl-nobel.ttf') format('truetype'),
+       url('../assets/fonts/dtl-nobel.svg') format('svg');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "DTL Nobel";
+  src: url('../assets/fonts/dtl-nobel-bold.eot');
+  src: url('../assets/fonts/dtl-nobel-bold.eot?#iefix') format('embedded-opentype'),
+       url('../assets/fonts/dtl-nobel-bold.woff') format('woff'),
+       url('../assets/fonts/dtl-nobel-bold.ttf') format('truetype'),
+       url('../assets/fonts/dtl-nobel-bold.svg') format('svg');
+  font-weight: bold;
+}
+
+// Rules
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+  line-height: 1.35;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'DTL Nobel', sans-serif;
+}
+
+.container {
+  max-width: 640px;
+  float: none;
+  margin: 0 auto;
+}
 
 label {
   cursor: pointer;
 }
 
-.required {
-  label:after {
-    content: '*';
-    color: $dnt-primary;
-    font-weight: bold;
+div.required label:after, span.required {
+  content: ' *';
+  color: $dnt-primary;
+  font-weight: bold;
+}
+
+div.field {
+  margin-bottom: 10px;
+  &.error {
+    input {
+      border-color: $dnt-primary;
+    }
+    .message {
+      color: $dnt-primary;
+    }
+  }
+
+  display: flex;
+  flex-direction: row;
+
+  div.label {
+    flex: .5;
+  }
+
+  div.input {
+    flex: 1;
+  }
+
+  label {
+    display: inline-block;
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+}
+
+form {
+  border: 2px solid #ccc;
+  padding: 40px;
+}
+
+fieldset, legend {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-family: 'DTL Nobel';
+  font-weight: bold;
+  font-size: 20px;
+}
+
+button {
+  background-color: $dnt-primary;
+  border: 0;
+  padding: 15px 20px;
+  color: #fff;
+  font-family: 'DTL Nobel';
+  font-size: 16px;
+}
+
+// Input fields
+
+input[type="text"], textarea {
+  padding: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ccc;
+  font-family: 'Georgia';
+  font-size: 16px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.logo {
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  background-color: $dnt-primary;
+  height: 60px;
+  font-family: 'DTL Nobel';
+  line-height: 60px;
+  padding: 0 15px;
+
+  &:after {
+    background-color: $dnt-primary;
+    position: absolute;
+    content: '';
+    background-image: url('../assets/images/dnt-logo-circle.svg');
+    background-size: 44px;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 60px;
+    width: 60px;
+    top: 0;
+    right: -62px;
   }
 }

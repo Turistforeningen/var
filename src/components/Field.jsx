@@ -26,23 +26,29 @@ class Field extends Component {
     const errors = form.errors[name];
     const touched = form.touched[name] === true;
     const validated = form.validated === true;
+    const showErrors = !!errors && (!!touched || !!validated);
 
     return (
-      <div className={required ? 'required' : ''}>
-        <label>
-          {label}
-        </label>
-        <input
-          value={value}
-          onChange={this.handleInputChange}
-          onBlur={this.handleInputBlur}
-        />
-        {
-          !!errors && (!!touched || !!validated) &&
-          <div className="errors">
-            {errors}
-          </div>
-        }
+      <div className={`field ${required ? 'required' : ''} ${showErrors ? 'error' : ''}`}>
+        <div className="label">
+          <label>
+            {label}
+          </label>
+        </div>
+        <div className="input">
+          <input
+            type="text"
+            value={value}
+            onChange={this.handleInputChange}
+            onBlur={this.handleInputBlur}
+          />
+          {
+            showErrors &&
+            <div className="message error">
+              {errors}
+            </div>
+          }
+        </div>
       </div>
     );
   }
