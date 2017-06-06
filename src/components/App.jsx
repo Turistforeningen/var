@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Switch, Route} from 'react-router-dom';
 
-import Index from './Index.jsx';
 import Registration from './Registration.jsx';
 
 require('../styles/app.scss');

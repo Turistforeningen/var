@@ -139,12 +139,13 @@ class Form extends Component {
               <input
                 type="checkbox"
                 name="type"
+                id={type.name}
                 value={type.name}
                 onChange={this.handleActivitiesChange}
                 checked={!!(this.props.form.data.activities || [])
                   .find(activity => activity === type.name)}
               />
-              <label>
+              <label htmlFor={type.name}>
                 {type.label}
               </label>
             </div>
