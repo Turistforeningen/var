@@ -73,6 +73,11 @@ class Form extends Component {
   }
 
   @autobind
+  handleCommentsChange(e) {
+    this.props.setField('comments', e.target.value);
+  }
+
+  @autobind
   handleRegisterClick(e) {
     this.props.sendRegistration(this.props.form);
   }
@@ -159,7 +164,7 @@ class Form extends Component {
 
           <h2>Kommentarer</h2>
           <div>
-            <textarea></textarea>
+            <textarea onChange={this.handleCommentsChange}></textarea>
           </div>
         </fieldset>
 
