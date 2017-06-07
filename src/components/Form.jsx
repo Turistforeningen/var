@@ -174,6 +174,10 @@ class Form extends Component {
                 .find(place => place === 'fjellet')}
             />
             <label>På fjellet</label>
+            {
+              form.errors.where && form.validated &&
+              <div className="validation error">{form.errors.where}</div>
+            }
           </div>
 
           <h2>Kommentarer</h2>
