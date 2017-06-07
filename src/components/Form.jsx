@@ -121,26 +121,30 @@ class Form extends Component {
 
           <h2>Hvor ønsker du å gjøre en innsats?</h2>
           <div className="checkbox">
-            <input
-              type="checkbox"
-              name="where"
-              value="nærmiljø"
-              onChange={this.handleWhereChange}
-              checked={!!(this.props.form.data.where || [])
-                .find(place => place === 'nærmiljø')}
-            />
-            <label>I mitt nærmiljø</label>
+            <label>
+              <input
+                type="checkbox"
+                name="where"
+                value="nærmiljø"
+                onChange={this.handleWhereChange}
+                checked={!!(this.props.form.data.where || [])
+                  .find(place => place === 'nærmiljø')}
+              />
+              I mitt nærmiljø
+            </label>
           </div>
           <div className="checkbox">
-            <input
-              type="checkbox"
-              name="where"
-              value="fjellet"
-              onChange={this.handleWhereChange}
-              checked={!!(this.props.form.data.where || [])
-                .find(place => place === 'fjellet')}
-            />
-            <label>På fjellet</label>
+            <label>
+              <input
+                type="checkbox"
+                name="where"
+                value="fjellet"
+                onChange={this.handleWhereChange}
+                checked={!!(this.props.form.data.where || [])
+                  .find(place => place === 'fjellet')}
+              />
+              På fjellet
+            </label>
             {
               form.errors.where && form.validated &&
               <div className="validation error">{form.errors.where}</div>
