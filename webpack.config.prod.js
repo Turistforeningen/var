@@ -1,14 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
   entry: {
-    admin: './src/index',
+    app: './src/index',
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'assets'),
     filename: '[name].js',
     publicPath: '/assets/',
   },
@@ -31,10 +30,6 @@ module.exports = {
           {loader: 'style-loader'},
           {loader: 'css-loader', options: {autoprefixer: true}},
         ],
-        // use: ExtractTextPlugin.extract({
-        //   fallback: "style-loader",
-        //   use: "css-loader"
-        // }),
       },
       {
         test: /\.png$/,
@@ -54,6 +49,5 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new ExtractTextPlugin("[name].css"),
   ],
 };
