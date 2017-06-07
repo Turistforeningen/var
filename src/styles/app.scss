@@ -99,6 +99,10 @@ div.checkbox {
 form {
   border: 2px solid #ccc;
   padding: 40px;
+
+  input[type="text"], label, select, textarea {
+    font-family: 'DTL Nobel';
+  }
 }
 
 fieldset, legend {
