@@ -99,13 +99,16 @@ div.field {
 
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   div.label {
     flex: .5;
+    flex-basis: 120px;
   }
 
   div.input {
     flex: 1;
+    flex-basis: 200px;
   }
 
   label {
