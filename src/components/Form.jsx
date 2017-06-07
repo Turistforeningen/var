@@ -123,7 +123,7 @@ class Form extends Component {
         <fieldset>
           <h2>Hva vil du gjøre?</h2>
           {types.map(type => (
-            <div key={type.name}>
+            <div className="checkbox" key={type.name}>
               <label>
                 <input
                   type="checkbox"
@@ -139,7 +139,7 @@ class Form extends Component {
           ))}
 
           <h2>Hvor ønsker du å gjøre en innsats?</h2>
-          <div>
+          <div className="checkbox">
             <input
               type="checkbox"
               name="where"
@@ -150,7 +150,7 @@ class Form extends Component {
             />
             <label>I mitt nærmiljø</label>
           </div>
-          <div>
+          <div className="checkbox">
             <input
               type="checkbox"
               name="where"
