@@ -11,9 +11,11 @@ class App extends Component {
     return (
       <Switch basename="/">
         <div>
-          <div className="container">
-            <div className="logo">Den Norske Turistforening</div>
-          </div>
+          <header>
+            <div className="container">
+              <a href="https://www.dntoslo.no" className="logo">DNT Oslo og Omegn</a>
+            </div>
+          </header>
           <Route exact path="/" component={Registration} />
         </div>
       </Switch>

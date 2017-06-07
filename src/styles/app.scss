@@ -174,7 +174,8 @@ textarea {
   height: 60px;
   font-family: 'DTL Nobel';
   line-height: 60px;
-  padding: 0 15px;
+  padding: 0 75px 0 15px;
+  text-decoration: none;
 
   &:after {
     background-color: $dnt-primary;
@@ -186,7 +187,7 @@ textarea {
     background-position: center;
     height: 60px;
     width: 60px;
-    top: 0;
-    right: -62px;
+    right: 0;
+    border-left: 2px solid #fff;
   }
 }
