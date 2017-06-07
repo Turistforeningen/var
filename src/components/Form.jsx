@@ -51,21 +51,6 @@ const types = [
 
 class Form extends Component {
   @autobind
-  handleFirstNameChange(e) {
-    this.props.setField('firstName', e.target.value);
-  }
-
-  @autobind
-  handleLastNameChange(e) {
-    this.props.setField('lastName', e.target.value);
-  }
-
-  @autobind
-  handleAddressChange(e) {
-    this.props.setField('address', e.target.value);
-  }
-
-  @autobind
   handleActivitiesChange(e) {
     const activities = [...this.props.form.data.activities || []];
 
