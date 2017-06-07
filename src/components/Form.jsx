@@ -91,7 +91,7 @@ class Form extends Component {
           <p>Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.</p>
         </div>
         {
-          !!Object.keys(form.errors).length &&
+          !!Object.keys(form.errors).length && form.validated &&
           <div className="message error">
             Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
             med feil.
@@ -203,7 +203,7 @@ class Form extends Component {
           />
         </fieldset>
         {
-          !!Object.keys(form.errors).length &&
+          !!Object.keys(form.errors).length && form.validated &&
           <div className="message error">
             Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
             med feil.
