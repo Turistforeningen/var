@@ -98,39 +98,6 @@ class Form extends Component {
           </div>
         }
         <fieldset>
-          <h2>Navn og adresse</h2>
-          <Field
-            label="Fornavn"
-            name="firstName"
-            value={form.firstName || ''}
-            required
-          />
-          <Field
-            label="Etternavn"
-            name="lastName"
-            value={form.lastName || ''}
-            required
-          />
-          <Field
-            label="Adresse"
-            name="address"
-            value={form.address || ''}
-          />
-          <Field
-            label="Postnummer"
-            name="zipcode"
-            value={form.zipcode || ''}
-            required
-          />
-          <Field
-            label="Sted"
-            name="city"
-            value={form.city || ''}
-            required
-          />
-        </fieldset>
-
-        <fieldset>
           <h2>Hva vil du gjøre?</h2>
           {types.map(type => (
             <div className="checkbox" key={type.name}>
@@ -187,7 +154,36 @@ class Form extends Component {
         </fieldset>
 
         <fieldset>
-          <h2>Kontaktinformasjon</h2>
+          <h2>Litt om deg</h2>
+          <Field
+            label="Fornavn"
+            name="firstName"
+            value={form.firstName || ''}
+            required
+          />
+          <Field
+            label="Etternavn"
+            name="lastName"
+            value={form.lastName || ''}
+            required
+          />
+          <Field
+            label="Adresse"
+            name="address"
+            value={form.address || ''}
+          />
+          <Field
+            label="Postnummer"
+            name="zipcode"
+            value={form.zipcode || ''}
+            required
+          />
+          <Field
+            label="Sted"
+            name="city"
+            value={form.city || ''}
+            required
+          />
           <Field
             label="Fødselsdato"
             name="dob"
