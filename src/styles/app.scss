@@ -48,6 +48,19 @@ label {
   cursor: pointer;
 }
 
+// Custom classes
+
+.message {
+  p {
+    margin: 0;
+  }
+  &.info {
+    border: 2px solid #00487e;
+    background-color: #ecf1f1;
+    color: #00487e;
+    padding: 20px;
+  }
+}
 .container {
   max-width: 640px;
   float: none;

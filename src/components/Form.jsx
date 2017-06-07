@@ -87,6 +87,9 @@ class Form extends Component {
 
     return (
       <form>
+        <div className="message info">
+          <p>Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.</p>
+        </div>
         <fieldset>
           <h2>Navn og adresse</h2>
           <Field
