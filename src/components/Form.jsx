@@ -140,6 +140,12 @@ class Form extends Component {
               </label>
             </div>
           ))}
+          {
+            form.errors.activities && form.validated &&
+            <div className="field error">
+              <div className="message">{form.errors.activities}</div>
+            </div>
+          }
 
           <h2>Hvor ønsker du å gjøre en innsats?</h2>
           <div className="checkbox">
