@@ -90,6 +90,13 @@ class Form extends Component {
         <div className="message info">
           <p>Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.</p>
         </div>
+        {
+          !!Object.keys(form.errors).length &&
+          <div className="message error">
+            Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
+            med feil.
+          </div>
+        }
         <fieldset>
           <h2>Navn og adresse</h2>
           <Field
@@ -142,9 +149,7 @@ class Form extends Component {
           ))}
           {
             form.errors.activities && form.validated &&
-            <div className="field error">
-              <div className="message">{form.errors.activities}</div>
-            </div>
+            <div className="validation error">{form.errors.activities}</div>
           }
 
           <h2>Hvor ønsker du å gjøre en innsats?</h2>
@@ -199,9 +204,9 @@ class Form extends Component {
         </fieldset>
         {
           !!Object.keys(form.errors).length &&
-          <div>
+          <div className="message error">
             Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
-            med feil
+            med feil.
           </div>
         }
 

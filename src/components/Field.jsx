@@ -44,7 +44,7 @@ class Field extends Component {
           />
           {
             showErrors &&
-            <div className="message error">
+            <div className="validation error">
               {errors}
             </div>
           }

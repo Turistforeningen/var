@@ -51,14 +51,23 @@ label {
 // Custom classes
 
 .message {
+  font-family: 'DTL Nobel';
+  padding: 20px;
+  border: 2px solid;
+  margin-bottom: 20px;
+
+  &.info {
+    border-color: #00487e;
+    color: #00487e;
+  }
+
+  &.error {
+    border-color: $dnt-primary;
+    color: $dnt-primary;
+  }
+
   p {
     margin: 0;
-  }
-  &.info {
-    border: 2px solid #00487e;
-    background-color: #ecf1f1;
-    color: #00487e;
-    padding: 20px;
   }
 }
 .container {
@@ -73,15 +82,17 @@ div.required label:after, span.required {
   font-weight: bold;
 }
 
+div.validation {
+  font-family: 'DTL Nobel';
+  margin-top: 4px;
+  color: $dnt-primary;
+}
+
 div.field {
   margin-bottom: 10px;
   &.error {
     input {
       border-color: $dnt-primary;
-    }
-    .message {
-      margin-top: 4px;
-      color: $dnt-primary;
     }
   }
 
@@ -112,6 +123,7 @@ div.checkbox {
 form {
   border: 2px solid #ccc;
   padding: 40px;
+  margin-bottom: 20px;
 
   input[type="text"], label, select, textarea {
     font-family: 'DTL Nobel';
