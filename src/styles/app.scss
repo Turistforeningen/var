@@ -44,14 +44,14 @@ h1, h2, h3, h4, h5 {
   font-family: 'DTL Nobel', sans-serif;
 }
 
+label {
+  cursor: pointer;
+}
+
 .container {
   max-width: 640px;
   float: none;
   margin: 0 auto;
-}
-
-label {
-  cursor: pointer;
 }
 
 div.required label:after, span.required {
