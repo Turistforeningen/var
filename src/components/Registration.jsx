@@ -8,6 +8,9 @@ class Registration extends Component {
     return (
       <div className="container">
         <h1>Bli frivillig</h1>
+        <div className="message info">
+          <p>Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.</p>
+        </div>
         <p>
           Her kan vi skrive en veldig bra tekst om hva det kan bety å være frivillig
           i DNT-systemet.
