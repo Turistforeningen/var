@@ -84,6 +84,7 @@ class Form extends Component {
 
   render() {
     const {form} = this.props;
+    const isMobileDevice = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
 
     return (
       <form>
@@ -188,18 +189,24 @@ class Form extends Component {
             value={form.city || ''}
             required
           />
+
           <Field
             label="Fødselsdato"
+            type={isMobileDevice ? 'date' : 'text'}
             name="dob"
             value={form.dob || ''}
           />
+
           <Field
             label="Telefon"
+            type="tel"
             name="phone"
             value={form.phone || ''}
             required
           />
+
           <Field
+            type="email"
             label="Epost"
             name="email"
             value={form.email || ''}
