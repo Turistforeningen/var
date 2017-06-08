@@ -115,10 +115,6 @@ div.field {
   label {
     display: inline-block;
   }
-
-  input[type="text"] {
-    width: 100%;
-  }
 }
 
 div.checkbox {
@@ -158,13 +154,18 @@ button {
 
 // Input fields
 
-input[type="text"], textarea {
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="text"],
+textarea {
   padding: 5px;
   border-style: solid;
   border-width: 2px;
   border-color: #ccc;
   font-family: 'Georgia';
   font-size: 16px;
+  width: 100%;
 }
 
 textarea {
