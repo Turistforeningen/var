@@ -61,6 +61,11 @@ label {
     color: #00487e;
   }
 
+  &.success {
+    border-color: #4cae4c;
+    color: #4cae4c;
+  }
+
   &.error {
     border-color: $dnt-primary;
     color: $dnt-primary;
