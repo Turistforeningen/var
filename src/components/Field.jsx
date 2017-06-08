@@ -21,7 +21,7 @@ class Field extends Component {
   }
 
   render() {
-    const {form, label, name, required} = this.props;
+    const {form, label, name, required, type} = this.props;
     const {value} = this.state;
     const errors = form.errors[name];
     const touched = form.touched[name] === true;
@@ -37,7 +37,7 @@ class Field extends Component {
         </div>
         <div className="input">
           <input
-            type="text"
+            type={type || 'text'}
             value={value}
             onChange={this.handleInputChange}
             onBlur={this.handleInputBlur}
