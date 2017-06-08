@@ -32,6 +32,8 @@ export const registrationValidator = (data) => {
 
   if (!data.email) {
     errors.email = 'Epost må fylles ut';
+  } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+    errors.email = 'Epost må være en gyldig epostadresse';
   }
 
   return {errors, warnings};
