@@ -33,7 +33,7 @@ $dnt-primary: #d82d20;
 }
 
 body {
-  font-family: Georgia, serif;
+  font-family: 'DTL Nobel';
   line-height: 1.35;
   color: #333;
   padding: 0;
@@ -44,6 +44,10 @@ h1, h2, h3, h4, h5 {
   font-family: 'DTL Nobel', sans-serif;
 }
 
+p {
+  font-family: Georgia, serif;
+}
+
 label {
   cursor: pointer;
 }
@@ -51,7 +55,6 @@ label {
 // Custom classes
 
 .message {
-  font-family: 'DTL Nobel';
   padding: 20px;
   border: 2px solid;
   margin-bottom: 20px;
@@ -94,7 +97,6 @@ div.required label:after, span.required {
 }
 
 div.validation {
-  font-family: 'DTL Nobel';
   margin-top: 4px;
   color: $dnt-primary;
 }
@@ -143,7 +145,6 @@ fieldset, legend {
 }
 
 legend {
-  font-family: 'DTL Nobel';
   font-weight: bold;
   font-size: 20px;
 }
@@ -153,8 +154,8 @@ button {
   border: 0;
   padding: 15px 20px;
   color: #fff;
-  font-family: 'DTL Nobel';
   font-size: 16px;
+  font-family: 'DTL Nobel';
 }
 
 // Input fields
