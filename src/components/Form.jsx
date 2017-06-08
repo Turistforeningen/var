@@ -43,7 +43,7 @@ const types = [
     description: 'Lorem',
   },
   {
-    label: 'Annet',
+    label: 'Annet – spesifiser i kommentarfeltet',
     name: 'annet',
     description: 'Lorem',
   },
