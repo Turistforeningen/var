@@ -83,7 +83,7 @@ class Form extends Component {
   }
 
   render() {
-    const {form} = this.props;
+    const {app, form} = this.props;
     const isMobileDevice = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
 
     return (
@@ -222,12 +222,22 @@ class Form extends Component {
         }
 
         <button type="button" onClick={this.handleRegisterClick}>Registrer meg</button>
+
+        {
+          app.isSent &&
+          <div className="message success">
+            <p>
+              Skjemaet er sendt til DNT Oslo og Omegn for behandling.
+            </p>
+          </div>
+        }
       </form>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  app: state.app,
   form: state.form,
 });
 
