@@ -102,16 +102,16 @@ div.validation {
 }
 
 div.field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 10px;
+
   &.error {
     input {
       border-color: $dnt-primary;
     }
   }
-
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 
   div.label {
     flex: .5;
