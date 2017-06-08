@@ -89,7 +89,7 @@ class Form extends Component {
     return (
       <form>
         <div className="message info">
-          <p>Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.</p>
+          Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.
         </div>
         {
           !!Object.keys(form.errors).length && form.validated &&
@@ -226,9 +226,7 @@ class Form extends Component {
         {
           app.isSent &&
           <div className="message success">
-            <p>
-              Skjemaet er sendt til DNT Oslo og Omegn for behandling.
-            </p>
+            Skjemaet er sendt til DNT Oslo og Omegn for behandling.
           </div>
         }
       </form>
