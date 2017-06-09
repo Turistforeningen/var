@@ -4,7 +4,10 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: './src/index',
+    app: [
+      'babel-polyfill',
+      './src/index',
+    ]
   },
   output: {
     path: path.join(__dirname, 'assets'),
