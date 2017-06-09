@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {autobind} from 'core-decorators';
+import moment from 'moment';
+import Datetime from 'react-datetime';
+
+import 'react-datetime/css/react-datetime.css';
 
 import {setField, sendRegistration} from '../actions/index.js';
 
@@ -80,6 +84,11 @@ class Form extends Component {
   @autobind
   handleRegisterClick(e) {
     this.props.sendRegistration(this.props.form);
+  }
+
+  @autobind
+  handleDobChange(date) {
+    this.props.setField('dob', date.format('YYYY-MM-DD'));
   }
 
   render() {
@@ -194,6 +203,20 @@ class Form extends Component {
             type={isMobileDevice ? 'date' : 'text'}
             name="dob"
             value={form.dob || ''}
+            input={
+              isMobileDevice ?
+              null
+              :
+              <Datetime
+                value={form.dob ? moment(form.dob).format('DD.MM.YYYY') : ''}
+                dateFormat={'DD.MM.YYYY'}
+                utc={true}
+                timeFormat={false}
+                locale="nb"
+                onChange={this.handleDobChange}
+                closeOnSelect={true}
+              />
+            }
           />
           <Field
             label="Telefon"

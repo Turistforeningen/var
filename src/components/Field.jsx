@@ -21,7 +21,7 @@ class Field extends Component {
   }
 
   render() {
-    const {form, label, name, required, type} = this.props;
+    const {form, label, name, required, type, input} = this.props;
     const {value} = this.state;
     const errors = form.errors[name];
     const touched = form.touched[name] === true;
@@ -36,12 +36,17 @@ class Field extends Component {
           </label>
         </div>
         <div className="input">
-          <input
-            type={type || 'text'}
-            value={value}
-            onChange={this.handleInputChange}
-            onBlur={this.handleInputBlur}
-          />
+
+          {
+            input
+            ||
+            <input
+              type={type || 'text'}
+              value={value}
+              onChange={this.handleInputChange}
+              onBlur={this.handleInputBlur}
+            />
+          }
           {
             showErrors &&
             <div className="validation error">
