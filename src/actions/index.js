@@ -70,7 +70,7 @@ export function sendRegistration(form) {
           dispatch(receiveSend());
         });
     }).catch((err) => {
-      console.warn('Did not send registration, due to validation errors.');
+      console.warn('Did not send registration, due to validation errors.'); // eslint-disable-line
     });
   };
 }
