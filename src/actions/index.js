@@ -1,5 +1,24 @@
 import {registrationValidator} from '../validators/index.js';
 
+export const TOGGLE_ACTIVITY = 'TOGGLE_ACTIVITY';
+export function toggleActivity(activity, isSelected) {
+  return {
+    type: TOGGLE_ACTIVITY,
+    activity: activity,
+    isSelected: isSelected,
+  };
+}
+
+export const TOGGLE_WHERE = 'TOGGLE_WHERE';
+export function toggleWhere(activity, where, isSelected) {
+  return {
+    type: TOGGLE_WHERE,
+    activity: activity,
+    where: where,
+    isSelected: isSelected,
+  };
+}
+
 export const SET_FIELD = 'SET_FIELD';
 export function setField(field, value) {
   return {

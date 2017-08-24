@@ -8,6 +8,7 @@ import 'react-datetime/css/react-datetime.css';
 
 import {setField, sendRegistration} from '../actions/index.js';
 
+import Activity from './Activity.jsx';
 import Field from './Field.jsx';
 
 const types = [
@@ -55,28 +56,6 @@ const types = [
 
 class Form extends Component {
   @autobind
-  handleActivitiesChange(e) {
-    const activities = [...this.props.form.data.activities || []];
-
-    if (e.target.checked) {
-      this.props.setField('activities', [...activities, e.target.value]);
-    } else {
-      this.props.setField('activities', activities.filter(activity => activity !== e.target.value));
-    }
-  }
-
-  @autobind
-  handleWhereChange(e) {
-    const where = [...this.props.form.data.where || []];
-
-    if (e.target.checked) {
-      this.props.setField('where', [...where, e.target.value]);
-    } else {
-      this.props.setField('where', where.filter(place => place !== e.target.value));
-    }
-  }
-
-  @autobind
   handleCommentsChange(e) {
     this.props.setField('comments', e.target.value);
   }
@@ -110,56 +89,12 @@ class Form extends Component {
         <fieldset>
           <h2>Hva vil du gjøre?</h2>
           {types.map(type => (
-            <div className="checkbox" key={type.name}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="type"
-                  value={type.name}
-                  onChange={this.handleActivitiesChange}
-                  checked={!!(this.props.form.data.activities || [])
-                    .find(activity => activity === type.name)}
-                />
-                {type.label}
-              </label>
-            </div>
+            <Activity key={type.name} type={type} />
           ))}
           {
             form.errors.activities && form.validated &&
             <div className="validation error">{form.errors.activities}</div>
           }
-
-          <h2>Hvor ønsker du å gjøre en innsats?</h2>
-          <div className="checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="where"
-                value="nærmiljø"
-                onChange={this.handleWhereChange}
-                checked={!!(this.props.form.data.where || [])
-                  .find(place => place === 'nærmiljø')}
-              />
-              I mitt nærmiljø
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="where"
-                value="fjellet"
-                onChange={this.handleWhereChange}
-                checked={!!(this.props.form.data.where || [])
-                  .find(place => place === 'fjellet')}
-              />
-              På fjellet
-            </label>
-            {
-              form.errors.where && form.validated &&
-              <div className="validation error">{form.errors.where}</div>
-            }
-          </div>
 
           <h2>Kommentarer</h2>
           <div>
