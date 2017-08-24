@@ -50,7 +50,6 @@ const types = [
   {
     label: 'Annet – spesifiser i kommentarfeltet',
     name: 'annet',
-    description: 'Lorem',
   },
 ];
 

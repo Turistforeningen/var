@@ -7,7 +7,8 @@ import {toggleActivity, toggleWhere} from '../actions/index.js';
 class Activity extends Component {
   constructor(props) {
     super();
-    this.state = {isChecked: false, where: []};
+
+    this.state = {infoIsVisible: false};
   }
 
   @autobind
@@ -24,22 +25,44 @@ class Activity extends Component {
     this.props.toggleWhere(this.props.type.name, e.target.value, isChecked);
   }
 
+  @autobind
+  toggleInfoIsVisible(e) {
+    this.setState({infoIsVisible: !this.state.infoIsVisible});
+  }
+
   render() {
     const {type, activity} = this.props;
     const {isSelected} = this.props.activity;
+    const {infoIsVisible} = this.state;
 
     return (
       <div className="checkbox" key={type.name}>
-        <label style={{display: 'block', marginBottom: '5px'}}>
-          <input
-            type="checkbox"
-            name="type"
-            value={type.name}
-            onChange={this.handleActivityToggle}
-            checked={!!isSelected}
-          />
-          {type.label}
-        </label>
+        <div style={{display: 'block', marginBottom: '5px'}}>
+          <label>
+            <input
+              type="checkbox"
+              name="type"
+              value={type.name}
+              onChange={this.handleActivityToggle}
+              checked={!!isSelected}
+            />
+            {type.label}
+          </label>
+          {' '}
+          <a
+            onClick={this.toggleInfoIsVisible}
+            style={{color: '#147dcc', textDecoration: 'underline', cursor: 'pointer'}}
+          >
+
+            {type.description ? (infoIsVisible ? 'Skjul info' : 'Vis info') : ''}
+          </a>
+        </div>
+        {
+          infoIsVisible &&
+          <div style={{border: '2px solid #ccc', padding: '20px', marginBottom: '10px'}}>
+            {type.description}
+          </div>
+        }
         {
           isSelected &&
           <div style={{border: '2px solid #ccc', padding: '20px', marginBottom: '10px'}}>
