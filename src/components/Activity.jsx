@@ -30,7 +30,7 @@ class Activity extends Component {
 
     return (
       <div className="checkbox" key={type.name}>
-        <label>
+        <label style={{display: 'block', marginBottom: '5px'}}>
           <input
             type="checkbox"
             name="type"
@@ -42,7 +42,8 @@ class Activity extends Component {
         </label>
         {
           isSelected &&
-          <div>
+          <div style={{border: '2px solid #ccc', padding: '20px', marginBottom: '10px'}}>
+            <h4 style={{marginTop: '0px', marginBottom: '5px'}}>Hvor?</h4>
             <div className="checkbox">
               <label>
                 <input
