@@ -54,7 +54,7 @@ class Activity extends Component {
             style={{color: '#147dcc', textDecoration: 'underline', cursor: 'pointer'}}
           >
 
-            {type.description ? (infoIsVisible ? 'Skjul info' : 'Vis info') : ''}
+            {type.description && (infoIsVisible ? 'Skjul info' : 'Vis info')}
           </a>
         </div>
         {
