@@ -27,9 +27,9 @@ export const registrationValidator = (data) => {
   }
 
   errors.where = selectedActivities.reduce((acc, curr) => {
-    if (Object.keys(data.activities[curr].where).filter(id => {
-      return data.activities[curr].where[id] === true;
-    }) < 1) {
+    if (Object.keys(data.activities[curr].where).filter(id => (
+      data.activities[curr].where[id] === true
+    )) < 1) {
       return {...acc, [curr]: 'Du må velge minst ett sted'};
     }
     return acc;

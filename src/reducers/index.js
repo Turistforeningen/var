@@ -65,7 +65,7 @@ function activitiesReducer(state, action) {
                 [curr2.id]: false,
               }
             ), {}),
-          }}), {})
+          }}), {}),
       };
     case TOGGLE_ACTIVITY:
       return {
