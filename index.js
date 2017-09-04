@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const fetch = require('isomorphic-fetch');
 const nunjucks = require('nunjucks');
 const raven = require('raven');
 
@@ -9,6 +10,8 @@ const sentry = require('./lib/sentry');
 
 const app = module.exports = express();
 const router = new express.Router();
+
+const API_HOSTNAME = 'http://crm:4321';
 
 app.set('json spaces', 2);
 app.set('x-powered-by', false);
@@ -32,8 +35,77 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post('/registrer', (req, res, next) => {
-  res.json({success: true});
+router.post('/api/incident', (req, res, next) => {
+  const data = req.body;
+
+  const crmData = {
+    Comments: data.comments,
+    UnionId: '2',
+    CaseTypeCode: 2,
+    Activity: Object.keys(data.activities)
+    .filter((id) => {
+      return data.activities[id].isSelected === true;
+    })
+    .map((id) => {
+      return {
+        CrmId: id,
+        Name: data.activities[id].name,
+        Place: '',
+      };
+    }),
+    UserInfo: {
+      FirstName: data.firstName,
+      LastName: data.lastName,
+      AddressLine1: data.address,
+      PostalCode: data.zipcode,
+      City: data.city,
+      MobilePhone: data.phone,
+      Email: data.email,
+      DateOfBirth: data.dob || '',
+    },
+  };
+
+  const options = {
+    method: 'POST',
+    timeout: 10000,
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(crmData),
+  };
+
+  let statusCode;
+
+  fetch(`${API_HOSTNAME}/api/Incident`, options)
+    .then(response => {
+      statusCode = response.status;
+
+      return response.json();
+    })
+    .then(json => {
+      res.status(statusCode).json(json);
+    })
+    .catch(err => {
+      res.status(err.status || 500).json({err: err});
+    });
+});
+
+router.get('/api/activity', (req, res, next) => {
+  const options = {
+    timeout: 10000,
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+
+  fetch(`${API_HOSTNAME}/api/Activity`, options)
+    .then(response => {
+      return response.json();
+    })
+    .then(json => {
+      res.json(json);
+    })
+    .catch(err => {
+      res.json({err: err});
+    });
 });
 
 // Sentry Error Handling

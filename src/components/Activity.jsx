@@ -15,14 +15,14 @@ class Activity extends Component {
   handleActivityToggle(e) {
     const isChecked = e.target.checked;
 
-    this.props.toggleActivity(this.props.type.name, isChecked);
+    this.props.toggleActivity(this.props.type.id, isChecked);
   }
 
   @autobind
   handleWhereToggle(e) {
     const isChecked = e.target.checked;
 
-    this.props.toggleWhere(this.props.type.name, e.target.value, isChecked);
+    this.props.toggleWhere(this.props.type.id, e.target.value, isChecked);
   }
 
   @autobind
@@ -31,22 +31,22 @@ class Activity extends Component {
   }
 
   render() {
-    const {type, activity} = this.props;
+    const {type, activity, errors} = this.props;
     const {isSelected} = this.props.activity;
     const {infoIsVisible} = this.state;
 
     return (
-      <div className="checkbox" key={type.name}>
+      <div className="checkbox" key={type.id}>
         <div style={{display: 'block', marginBottom: '5px'}}>
           <label>
             <input
               type="checkbox"
               name="type"
-              value={type.name}
+              value={type.id}
               onChange={this.handleActivityToggle}
               checked={!!isSelected}
             />
-            {type.label}
+            {type.name}
           </label>
           {' '}
           <a
@@ -103,6 +103,7 @@ class Activity extends Component {
                 På fjellet
               </label>
             </div>
+            {errors && <div className="validation error">Du må velge minst ett sted</div>}
           </div>
         }
       </div>
@@ -111,9 +112,10 @@ class Activity extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  activities: state.activities,
+  activities: state.form.data.activities,
   type: ownProps.type,
-  activity: state.activities[ownProps.type.name],
+  activity: state.form.data.activities[ownProps.type.id],
+  errors: state.form.errors.where ? state.form.errors.where[ownProps.type.id] : undefined,
 });
 
 const mapDispatchToProps = dispatch => ({

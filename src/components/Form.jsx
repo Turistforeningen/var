@@ -66,7 +66,7 @@ class Form extends Component {
 
   @autobind
   handleDobChange(date) {
-    this.props.setField('dob', date.format('YYYY-MM-DD'));
+    this.props.setField('dob', date.toISOString());
   }
 
   render() {
@@ -81,14 +81,14 @@ class Form extends Component {
         {
           !!Object.keys(form.errors).length && form.validated &&
           <div className="message error">
-            Før skjemaet kan sendes inn, må du rette opp i feltene som er markert
-            med feil.
+            Før skjemaet kan sendes inn, må du rette opp i feltene som er
+            markert med feil.
           </div>
         }
         <fieldset>
           <h2>Hva vil du gjøre?</h2>
-          {types.map(type => (
-            <Activity key={type.name} type={type} />
+          {form.data.activities && Object.keys(form.data.activities).map(id => (
+            <Activity key={id} type={form.data.activities[id]} />
           ))}
           {
             form.errors.activities && form.validated &&
@@ -189,6 +189,7 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => ({
+  activities: state.activities,
   app: state.app,
   form: state.form,
 });

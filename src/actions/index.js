@@ -1,4 +1,27 @@
+import fetch from 'isomorphic-fetch';
 import {registrationValidator} from '../validators/index.js';
+
+export const RECEIVE_ACTIVITIES = 'RECEIVE_ACTIVITIES';
+export function receiveActivities(activities) {
+  return {
+    type: RECEIVE_ACTIVITIES,
+    activities: activities,
+  };
+}
+
+export function getActivities() {
+  return (dispatch, getState) => { // eslint-disable-line arrow-body-style
+    return fetch('/api/activity', {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then((activities) => {
+        dispatch(receiveActivities(activities));
+      });
+  };
+}
 
 export const TOGGLE_ACTIVITY = 'TOGGLE_ACTIVITY';
 export function toggleActivity(activity, isSelected) {
@@ -84,7 +107,7 @@ export function sendRegistration(form) {
         body: JSON.stringify(data),
       };
 
-      return fetch('/registrer', options)
+      return fetch('/api/incident', options)
         .then((result) => {
           dispatch(receiveSend());
         });

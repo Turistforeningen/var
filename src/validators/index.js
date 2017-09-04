@@ -18,12 +18,25 @@ export const registrationValidator = (data) => {
     errors.city = 'Sted må fylles ut';
   }
 
-  if (!data.activities || !data.activities.length) {
+  const selectedActivities = Object.keys(data.activities || {}).filter(id => (
+    data.activities[id].isSelected === true
+  ));
+
+  if (selectedActivities.length < 1) {
     errors.activities = 'Du må velge minst en aktivitet';
   }
 
-  if (!data.where || !data.where.length) {
-    errors.where = 'Du må velge minst ett sted';
+  errors.where = selectedActivities.reduce((acc, curr) => {
+    if (Object.keys(data.activities[curr].where).filter(id => {
+      return data.activities[curr].where[id] === true;
+    }) < 1) {
+      return {...acc, [curr]: 'Du må velge minst ett sted'};
+    }
+    return acc;
+  }, {});
+
+  if (Object.keys(errors.where).length === 0) {
+    delete errors.where;
   }
 
   if (!data.phone) {

@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {registrationValidator} from '../validators/index.js';
 import {
+  RECEIVE_ACTIVITIES,
   RECEIVE_SEND,
   REQUEST_SEND,
   SET_FIELD,
@@ -9,61 +10,18 @@ import {
   TOGGLE_WHERE,
 } from '../actions/index.js';
 
-const activityOptions = [
-  {
-    label: 'Hyttedugnad',
-    name: 'hyttedugnad',
-    description: 'Lorem',
-  },
-  {
-    label: 'Hyttevakt',
-    name: 'hyttevakt',
-    description: 'Lorem',
-  },
-  {
-    label: 'Stimerking',
-    name: 'stimerking',
-    description: 'Lorem',
-  },
-  {
-    label: 'Turledelse og -instruksjon',
-    name: 'turledelse-og-instruksjon',
-    description: 'Lorem',
-  },
-  {
-    label: 'Frivillig på arrangement',
-    name: 'frivillig-pa-arrangement',
-    description: 'Lorem',
-  },
-  {
-    label: 'Informasjons- og kommunikasjonsarbeid',
-    name: 'info-komm-arbeid',
-    description: 'Lorem',
-  },
-  {
-    label: 'Verv og organisasjonsarbeid',
-    name: 'verv-org-arbeid',
-    description: 'Lorem',
-  },
-  {
-    label: 'Annet – spesifiser i kommentarfeltet',
-    name: 'annet',
-    description: 'Lorem',
-  },
-];
-
 const whereOptions = [
   {
-    label: 'I nærmiljøet',
-    name: 'nærmiljø',
+    id: 'nærmiljø',
+    name: 'I nærmiljøet',
   },
   {
-    label: 'I min region / mitt fylke',
-    name: 'regionfylke',
+    id: 'regionfylke',
+    name: 'I min region / mitt fylke',
   },
   {
-    label: 'På fjellet',
-    name: 'fjellet',
+    id: 'fjellet',
+    name: 'På fjellet',
   },
 ];
 
@@ -89,18 +47,26 @@ function appReducer(state = {isSending: false, isSent: false}, action) {
   }
 }
 
-function activitiesReducer(state = activityOptions.reduce((acc, curr) => ({
-  ...acc,
-  [curr.name]: {
-    isSelected: false,
-    where: whereOptions.reduce((acc2, curr2) => (
-      {
-        ...acc2,
-        [curr2.name]: false,
-      }
-    ), {}),
-  }}), {}), action) {
+function activitiesReducer(state, action) {
   switch (action.type) {
+    case RECEIVE_ACTIVITIES:
+      return {
+        ...state,
+        ...action.activities.reduce((acc, curr) => ({
+          ...acc,
+          [curr.CrmId]: {
+            id: curr.CrmId,
+            name: curr.Name,
+            isSelected: false,
+            description: 'Lorem',
+            where: whereOptions.reduce((acc2, curr2) => (
+              {
+                ...acc2,
+                [curr2.id]: false,
+              }
+            ), {}),
+          }}), {})
+      };
     case TOGGLE_ACTIVITY:
       return {
         ...state,
@@ -155,6 +121,17 @@ function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, 
         validated: true,
       };
 
+    case RECEIVE_ACTIVITIES:
+    case TOGGLE_ACTIVITY:
+    case TOGGLE_WHERE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          activities: activitiesReducer(state.data.activities, action),
+        },
+      };
+
     default:
       return {...state};
   }
@@ -162,7 +139,6 @@ function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, 
 
 const rootReducer = combineReducers({
   app: appReducer,
-  activities: activitiesReducer,
   form: formReducer,
 });
 
