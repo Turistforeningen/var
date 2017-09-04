@@ -11,48 +11,6 @@ import {setField, sendRegistration} from '../actions/index.js';
 import Activity from './Activity.jsx';
 import Field from './Field.jsx';
 
-const types = [
-  {
-    label: 'Hyttedugnad',
-    name: 'hyttedugnad',
-    description: 'Lorem',
-  },
-  {
-    label: 'Hyttevakt',
-    name: 'hyttevakt',
-    description: 'Lorem',
-  },
-  {
-    label: 'Stimerking',
-    name: 'stimerking',
-    description: 'Lorem',
-  },
-  {
-    label: 'Turledelse og -instruksjon',
-    name: 'turledelse-og-instruksjon',
-    description: 'Lorem',
-  },
-  {
-    label: 'Frivillig på arrangement',
-    name: 'frivillig-pa-arrangement',
-    description: 'Lorem',
-  },
-  {
-    label: 'Informasjons- og kommunikasjonsarbeid',
-    name: 'info-komm-arbeid',
-    description: 'Lorem',
-  },
-  {
-    label: 'Verv og organisasjonsarbeid',
-    name: 'verv-org-arbeid',
-    description: 'Lorem',
-  },
-  {
-    label: 'Annet – spesifiser i kommentarfeltet',
-    name: 'annet',
-  },
-];
-
 class Form extends Component {
   @autobind
   handleCommentsChange(e) {
