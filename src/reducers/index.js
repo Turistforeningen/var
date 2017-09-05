@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {registrationValidator} from '../validators/index.js';
 import {
+  REQUEST_ACTIVITIES,
   RECEIVE_ACTIVITIES,
   RECEIVE_SEND,
   REQUEST_SEND,
@@ -25,8 +26,18 @@ const whereOptions = [
   },
 ];
 
-function appReducer(state = {isSending: false, isSent: false}, action) {
+function appReducer(state = {isFetching: false, isSending: false, isSent: false}, action) {
   switch (action.type) {
+    case REQUEST_ACTIVITIES:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case RECEIVE_ACTIVITIES:
+      return {
+        ...state,
+        isFetching: false,
+      };
     case REQUEST_SEND:
       return {
         ...state,

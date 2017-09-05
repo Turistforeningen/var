@@ -1,6 +1,13 @@
 import fetch from 'isomorphic-fetch';
 import {registrationValidator} from '../validators/index.js';
 
+export const REQUEST_ACTIVITIES = 'REQUEST_ACTIVITIES';
+export function requestActivities(activities) {
+  return {
+    type: REQUEST_ACTIVITIES,
+  };
+}
+
 export const RECEIVE_ACTIVITIES = 'RECEIVE_ACTIVITIES';
 export function receiveActivities(activities) {
   return {
@@ -11,6 +18,8 @@ export function receiveActivities(activities) {
 
 export function getActivities() {
   return (dispatch, getState) => { // eslint-disable-line arrow-body-style
+    dispatch(requestActivities());
+
     return fetch('/api/activity', {
       headers: {
         'Content-type': 'application/json',

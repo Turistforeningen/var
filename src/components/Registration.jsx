@@ -25,7 +25,7 @@ class Registration extends Component {
           Fyll ut skjemaet for å bli frivillig for forening DNT Oslo og Omegn. Alle felt merket med
           <span className="required"> *</span> må fylles ut.
         </p>
-        <Form />
+        {this.props.app.isFetching === false && <Form />}
       </div>
     );
   }
@@ -33,6 +33,7 @@ class Registration extends Component {
 
 
 const mapStateToProps = state => ({
+  app: state.app,
 });
 
 const mapDispatchToProps = dispatch => ({
