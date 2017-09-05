@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import Raven from 'raven-js';
+
 import {registrationValidator} from '../validators/index.js';
 
 export const REQUEST_ACTIVITIES = 'REQUEST_ACTIVITIES';
@@ -26,6 +28,7 @@ export function receiveError(error) {
 
 export function getActivities() {
   let statusCode;
+  let serverResponse;
 
   return (dispatch, getState) => { // eslint-disable-line arrow-body-style
     dispatch(requestActivities());
@@ -37,14 +40,17 @@ export function getActivities() {
     })
       .then((response) => {
         statusCode = response.status;
+        serverResponse = response;
 
         return response.json();
       })
       .then((activities) => {
-        if (statusCode >= 400) {
+        if (statusCode >= 400 || ((activities.length === undefined) || (activities.length < 1))) {
           dispatch(receiveError('Det skjedde en feil ved henting av registrerinigsskjemaet. Prøv å oppdatere siden, og ta kontakt med oss på hjelp@dnt.no dersom feilen vedvarer.')); // eslint-disable-line max-len
-        } else if ((typeof activities.length === 'undefined') || (activities.length < 1)) {
-          dispatch(receiveError('Det skjedde en feil ved henting av registrerinigsskjemaet. Prøv å oppdatere siden, og ta kontakt med oss på hjelp@dnt.no dersom feilen vedvarer.')); // eslint-disable-line max-len
+
+          Raven.captureException('Feil ved henting av aktiviteter', {
+            extra: {response: serverResponse},
+          });
         } else {
           dispatch(receiveActivities(activities));
         }
