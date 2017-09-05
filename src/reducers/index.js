@@ -88,7 +88,7 @@ function activitiesReducer(state, action) {
             where: whereOptions.reduce((acc2, curr2) => (
               {
                 ...acc2,
-                [curr2.id]: false,
+                [curr2.id]: {...curr2, isSelected: false},
               }
             ), {}),
           }}), {}),
@@ -109,7 +109,10 @@ function activitiesReducer(state, action) {
           ...state[action.activity],
           where: {
             ...state[action.activity].where,
-            [action.where]: action.isSelected,
+            [action.where]: {
+              ...state[action.activity].where[action.where],
+              isSelected: action.isSelected,
+            },
           },
         },
       };

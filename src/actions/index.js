@@ -146,6 +146,14 @@ export function sendRegistration(form) {
             {
               CrmId: id,
               Name: data.activities[id].name,
+              Place: Object.keys(data.activities[id].where || {})
+                .filter(where => (
+                  data.activities[id].where[where].isSelected === true
+                ))
+                .map(where => (
+                  data.activities[id].where[where].name
+                ))
+                .join(', '),
             }
           )),
         UserInfo: {

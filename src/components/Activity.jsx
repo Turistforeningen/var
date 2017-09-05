@@ -67,42 +67,23 @@ class Activity extends Component {
           isSelected &&
           <div style={{border: '2px solid #ccc', padding: '20px', marginBottom: '10px'}}>
             <h4 style={{marginTop: '0px', marginBottom: '5px'}}>Hvor?</h4>
-            <div className="checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="where"
-                  value="nærmiljø"
-                  onChange={this.handleWhereToggle}
-                  checked={!!activity.where.nærmiljø}
-                />
-                I mitt nærmiljø
-              </label>
-            </div>
-            <div className="checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="where"
-                  value="regionfylke"
-                  onChange={this.handleWhereToggle}
-                  checked={!!activity.where.regionfylke}
-                />
-                I min region / mitt fylke
-              </label>
-            </div>
-            <div className="checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="where"
-                  value="fjellet"
-                  onChange={this.handleWhereToggle}
-                  checked={!!activity.where.fjellet}
-                />
-                På fjellet
-              </label>
-            </div>
+            {
+              Object.keys(activity.where || {})
+                .map(id => (
+                  <div key={id} className="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="where"
+                        value={id}
+                        onChange={this.handleWhereToggle}
+                        checked={!!activity.where[id].isSelected}
+                      />
+                      {activity.where[id].name}
+                    </label>
+                  </div>
+                ))
+            }
             {errors && <div className="validation error">Du må velge minst ett sted</div>}
           </div>
         }
