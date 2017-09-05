@@ -36,40 +36,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/api/incident', (req, res, next) => {
-  const data = req.body;
-
-  const crmData = {
-    Comments: data.comments,
-    UnionId: '2',
-    CaseTypeCode: 2,
-    Activity: Object.keys(data.activities)
-    .filter((id) => {
-      return data.activities[id].isSelected === true;
-    })
-    .map((id) => {
-      return {
-        CrmId: id,
-        Name: data.activities[id].name,
-        Place: '',
-      };
-    }),
-    UserInfo: {
-      FirstName: data.firstName,
-      LastName: data.lastName,
-      AddressLine1: data.address,
-      PostalCode: data.zipcode,
-      City: data.city,
-      MobilePhone: data.phone,
-      Email: data.email,
-      DateOfBirth: data.dob || '',
-    },
-  };
-
   const options = {
     method: 'POST',
     timeout: 10000,
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(crmData),
+    body: JSON.stringify(req.body),
   };
 
   let statusCode;

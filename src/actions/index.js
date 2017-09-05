@@ -136,13 +136,37 @@ export function sendRegistration(form) {
     const data = state.form.data;
 
     return dispatch(validateForm(data)).then(() => {
+      const crmData = {
+        Comments: data.comments,
+        UnionId: '2',
+        CaseTypeCode: 2,
+        Activity: Object.keys(data.activities)
+          .filter(id => (data.activities[id].isSelected === true))
+          .map(id => (
+            {
+              CrmId: id,
+              Name: data.activities[id].name,
+            }
+          )),
+        UserInfo: {
+          FirstName: data.firstName,
+          LastName: data.lastName,
+          AddressLine1: data.address,
+          PostalCode: data.zipcode,
+          City: data.city,
+          MobilePhone: data.phone,
+          Email: data.email,
+          DateOfBirth: data.dob || '',
+        },
+      };
+
       const options = {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(crmData),
       };
 
       return fetch('/api/incident', options)
