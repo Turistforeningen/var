@@ -5,6 +5,7 @@ import {
   RECEIVE_ACTIVITIES,
   RECEIVE_SEND,
   REQUEST_SEND,
+  RECEIVE_ERROR,
   SET_FIELD,
   SET_FORM_VALIDATION,
   TOGGLE_ACTIVITY,
@@ -26,7 +27,12 @@ const whereOptions = [
   },
 ];
 
-function appReducer(state = {isFetching: false, isSending: false, isSent: false}, action) {
+function appReducer(state = {
+  isFetching: false,
+  isFetched: false,
+  isSending: false,
+  isSent: false,
+}, action) {
   switch (action.type) {
     case REQUEST_ACTIVITIES:
       return {
@@ -37,6 +43,7 @@ function appReducer(state = {isFetching: false, isSending: false, isSent: false}
       return {
         ...state,
         isFetching: false,
+        isFetched: true,
       };
     case REQUEST_SEND:
       return {
@@ -47,8 +54,16 @@ function appReducer(state = {isFetching: false, isSending: false, isSent: false}
     case RECEIVE_SEND:
       return {
         ...state,
-        isSent: true,
+        isSent: !action.error,
         isSending: false,
+      };
+
+    case RECEIVE_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        isFetched: false,
+        error: action.error,
       };
 
     default:
@@ -142,6 +157,15 @@ function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, 
           activities: activitiesReducer(state.data.activities, action),
         },
       };
+
+    case RECEIVE_SEND:
+      if (action.error) {
+        return {
+          ...state,
+          error: action.error,
+        };
+      }
+      return {...state};
 
     default:
       return {...state};

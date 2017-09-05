@@ -16,7 +16,17 @@ export function receiveActivities(activities) {
   };
 }
 
+export const RECEIVE_ERROR = 'RECEIVE_ERROR';
+export function receiveError(error) {
+  return {
+    type: RECEIVE_ERROR,
+    error: error,
+  };
+}
+
 export function getActivities() {
+  let statusCode;
+
   return (dispatch, getState) => { // eslint-disable-line arrow-body-style
     dispatch(requestActivities());
 
@@ -25,9 +35,19 @@ export function getActivities() {
         'Content-type': 'application/json',
       },
     })
-      .then(response => response.json())
+      .then((response) => {
+        statusCode = response.status;
+
+        return response.json();
+      })
       .then((activities) => {
-        dispatch(receiveActivities(activities));
+        if (statusCode >= 400) {
+          dispatch(receiveError('Det skjedde en feil ved henting av registrerinigsskjemaet. Prøv å oppdatere siden, og ta kontakt med oss på hjelp@dnt.no dersom feilen vedvarer.')); // eslint-disable-line max-len
+        } else if ((typeof activities.length === 'undefined') || (activities.length < 1)) {
+          dispatch(receiveError('Det skjedde en feil ved henting av registrerinigsskjemaet. Prøv å oppdatere siden, og ta kontakt med oss på hjelp@dnt.no dersom feilen vedvarer.')); // eslint-disable-line max-len
+        } else {
+          dispatch(receiveActivities(activities));
+        }
       });
   };
 }
@@ -88,9 +108,12 @@ export function validateForm(form) {
 }
 
 export const RECEIVE_SEND = 'RECEIVE_SEND';
-export function receiveSend() {
+export function receiveSend(err) {
   return {
     type: RECEIVE_SEND,
+    isSending: false,
+    isSent: !!err,
+    error: err ? err.message : undefined,
   };
 }
 
@@ -118,7 +141,11 @@ export function sendRegistration(form) {
 
       return fetch('/api/incident', options)
         .then((result) => {
-          dispatch(receiveSend());
+          if (result.status >= 400) {
+            dispatch(receiveSend(new Error('Det skjedde en feil ved innsending av skjemaet.')));
+          } else {
+            dispatch(receiveSend());
+          }
         });
     }).catch((err) => {
       console.warn('Did not send registration, due to validation errors.'); // eslint-disable-line

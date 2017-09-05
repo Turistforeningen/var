@@ -25,7 +25,8 @@ class Registration extends Component {
           Fyll ut skjemaet for å bli frivillig for forening DNT Oslo og Omegn. Alle felt merket med
           <span className="required"> *</span> må fylles ut.
         </p>
-        {this.props.app.isFetching === false && <Form />}
+        {this.props.app.isFetched === false && this.props.app.error && <div className="message error">{this.props.app.error}</div>}
+        {this.props.app.isFetched === true && <Form />}
       </div>
     );
   }

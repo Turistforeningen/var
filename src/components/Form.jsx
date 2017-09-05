@@ -141,6 +141,12 @@ class Form extends Component {
             Skjemaet er sendt til DNT Oslo og Omegn for behandling.
           </div>
         }
+        {
+          form.error &&
+          <div className="message error">
+            Det skjedde en feil ved innsending av skjemaet.
+          </div>
+        }
       </form>
     );
   }

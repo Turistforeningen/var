@@ -96,12 +96,15 @@ router.get('/api/activity', (req, res, next) => {
     },
   };
 
+  let statusCode;
+
   fetch(`${API_HOSTNAME}/api/Activity`, options)
     .then(response => {
+      statusCode = response.status;
       return response.json();
     })
     .then(json => {
-      res.json(json);
+      res.status(statusCode).json(json);
     })
     .catch(err => {
       res.json({err: err});
