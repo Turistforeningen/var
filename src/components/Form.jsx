@@ -33,9 +33,6 @@ class Form extends Component {
 
     return (
       <form>
-        <div className="message info">
-          Dette registreringsskjemaet er under utvikling, og sendes foreløpig ikke noe sted.
-        </div>
         {
           !!Object.keys(form.errors).length && form.validated &&
           <div className="message error">
