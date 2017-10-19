@@ -10,6 +10,10 @@ export const registrationValidator = (data) => {
     errors.lastName = 'Etternavn må fylles ut';
   }
 
+  if (!data.address) {
+    errors.address = 'Adresse må fylles ut';
+  }
+
   if (!data.zipcode) {
     errors.zipcode = 'Postnummer må fylles ut';
   }

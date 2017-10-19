@@ -74,6 +74,7 @@ class Form extends Component {
             label="Adresse"
             name="address"
             value={form.address || ''}
+            required
           />
           <Field
             label="Postnummer"
