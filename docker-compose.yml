@@ -14,6 +14,7 @@ services:
       options:
         max-size: "500k"
     environment:
+      - 'CRM_API_URL=http://crm:4321'
       - NODE_ENV=development
       - NPM_CONFIG_LOGLEVEL=info
       - NPM_CONFIG_PROGRESS=false

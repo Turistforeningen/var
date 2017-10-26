@@ -11,7 +11,7 @@ const sentry = require('./lib/sentry');
 const app = module.exports = express();
 const router = new express.Router();
 
-const API_HOSTNAME = 'http://crm:4321';
+const API_HOSTNAME = process.env.CRM_API_URL;
 
 app.set('json spaces', 2);
 app.set('x-powered-by', false);
