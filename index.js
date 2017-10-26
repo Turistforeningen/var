@@ -38,7 +38,7 @@ router.get('/', (req, res, next) => {
 router.post('/api/incident', (req, res, next) => {
   const options = {
     method: 'POST',
-    timeout: 60000,
+    timeout: Number(process.env.CRM_API_TIMEOUT),
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(req.body),
   };
@@ -61,7 +61,7 @@ router.post('/api/incident', (req, res, next) => {
 
 router.get('/api/activity', (req, res, next) => {
   const options = {
-    timeout: 60000,
+    timeout: Number(process.env.CRM_API_TIMEOUT),
     headers: {
       'Content-type': 'application/json',
     },
