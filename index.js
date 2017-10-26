@@ -36,23 +36,17 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/api/incident', (req, res, next) => {
+  const url = `${API_HOSTNAME}/api/Incident`;
   const options = {
     method: 'POST',
     timeout: Number(process.env.CRM_API_TIMEOUT),
-    headers: { 'Content-type': 'application/json' },
+    headers: {'Content-type': 'application/json'},
     body: JSON.stringify(req.body),
   };
 
-  let statusCode;
-
-  fetch(`${API_HOSTNAME}/api/Incident`, options)
+  fetch(url, options)
     .then(response => {
-      statusCode = response.status;
-
-      return response.json();
-    })
-    .then(json => {
-      res.status(statusCode).json(json);
+      res.status(response.status).send();
     })
     .catch(err => {
       res.status(err.status || 500).json({err: err});
@@ -60,16 +54,18 @@ router.post('/api/incident', (req, res, next) => {
 });
 
 router.get('/api/activity', (req, res, next) => {
+  const url = `${API_HOSTNAME}/api/Activity`;
   const options = {
     timeout: Number(process.env.CRM_API_TIMEOUT),
     headers: {
+      Accept: 'application/json',
       'Content-type': 'application/json',
     },
   };
 
   let statusCode;
 
-  fetch(`${API_HOSTNAME}/api/Activity`, options)
+  fetch(url, options)
     .then(response => {
       statusCode = response.status;
       return response.json();
