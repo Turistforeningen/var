@@ -29,6 +29,12 @@ class Registration extends Component {
           Dette registreringsskjemaet er under utvikling. Det kan derfor oppstå feil, og
           registreringer sendes foreløpig ikke noe sted.
         </div>
+        {
+          this.props.app.isFetching &&
+          <div className="message info">
+            Henter skjema...
+          </div>
+        }
         {this.props.app.isFetched === false && this.props.app.error && <div className="message error">{this.props.app.error}</div>}
         {this.props.app.isFetched === true && <Form />}
       </div>
