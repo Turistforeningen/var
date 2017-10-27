@@ -24,7 +24,10 @@ class Form extends Component {
 
   @autobind
   handleDobChange(date) {
-    this.props.setField('dob', date.format('YYYY-DD-MM'));
+    this.props.setField(
+      'dob',
+      typeof date.format === 'function' ? date.format('YYYY-DD-MM') : date
+    );
   }
 
   render() {
