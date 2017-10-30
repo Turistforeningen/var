@@ -178,6 +178,8 @@ export function sendRegistration(form) {
         body: JSON.stringify(crmData),
       };
 
+      dispatch(requestSend());
+
       return fetch('/api/incident', options)
         .then((result) => {
           if (result.status >= 400) {
