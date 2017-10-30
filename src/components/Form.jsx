@@ -147,6 +147,8 @@ class Form extends Component {
                 </button>
               );
             }
+
+            return null;
           })()
         }
 
