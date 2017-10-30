@@ -134,7 +134,21 @@ class Form extends Component {
           </div>
         }
 
-        <button type="button" onClick={this.handleRegisterClick}>Registrer meg</button>
+        {
+          (() => {
+            if (app.isSending) {
+              return (
+                <button type="button" disabled>Sender registrering...</button>
+              );
+            } else if (app.isSent !== true) {
+              return (
+                <button type="button" onClick={this.handleRegisterClick}>
+                  Registrer meg
+                </button>
+              );
+            }
+          })()
+        }
 
         {
           app.isSent &&
