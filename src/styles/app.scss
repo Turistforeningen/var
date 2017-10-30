@@ -158,6 +158,11 @@ button {
   font-size: 16px;
   font-family: 'DTL Nobel';
   margin-bottom: 20px;
+  border-radius: 0;
+
+  &[disabled] {
+    opacity: .5;
+  }
 }
 
 // Input fields
