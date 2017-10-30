@@ -117,8 +117,8 @@ export const RECEIVE_SEND = 'RECEIVE_SEND';
 export function receiveSend(err) {
   return {
     type: RECEIVE_SEND,
+    isSent: !err,
     isSending: false,
-    isSent: !!err,
     error: err ? err.message : undefined,
   };
 }
@@ -127,6 +127,7 @@ export const REQUEST_SEND = 'REQUEST_SEND';
 export function requestSend() {
   return {
     type: REQUEST_SEND,
+    isSending: true,
   };
 }
 

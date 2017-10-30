@@ -48,14 +48,14 @@ function appReducer(state = {
     case REQUEST_SEND:
       return {
         ...state,
-        isSending: true,
+        isSending: action.isSending,
       };
 
     case RECEIVE_SEND:
       return {
         ...state,
-        isSent: !action.error,
-        isSending: false,
+        isSent: action.isSent,
+        isSending: action.isSending,
       };
 
     case RECEIVE_ERROR:
