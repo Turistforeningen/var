@@ -9,21 +9,21 @@ class Registration extends Component {
       <div className="container">
         <h1>Bli frivillig</h1>
         <p>
-          Vil du være frivillig i DNT? Da har du mange muligheter! Som frivillig hos oss
-          kan du være med på mye: hyttedugnader, merking og vedlikehold av stier i fjellet
-          og nærområdene, vertskap under møter, foredrag og store utendørs arrangementer,
-          samt turledelse i fjellet, nærområdene eller på vannet. Du kan også bidra som
-          frivillig i våre styrer og utvalg, og dermed påvirke hva DNT som forening skal
-          satse på og prioritere.
+          Vil du være frivillig i DNT? Mesteparten av vårt tilbud{' '}
+          gjennomføres takket være dugnadsinnsats – og vi vil gjerne ha{' '}
+          din hjelp! Som frivillig kan du bidra med mye; hyttedugnad,{' '}
+          merking av stier, turledelse og vertskap på  møter, foredrag{' '}
+          og utendørsarrangementer. Våre styrer og utvalg er også drevet{' '}
+          av frivillige. For mer informasjon om aktivitetene våre, se under.
         </p>
         <p>
-          Mesteparten av vårt tilbud driftes av frivillige – og vi vil gjerne ha din hjelp!
-          Fyll ut kontaktinformasjon og ønsker i skjemaet under, så tar vi kontakt med deg.
+          Fyll ut kontaktinformasjon og ønsker i skjemaet under, så tar vi{' '}
+          kontakt med deg. Alle felt merket med{' '}
+          <span className="required">*</span>{' '}
+          må fylles ut.
+        </p>
+        <p>
           Velkommen skal du være!
-        </p>
-        <p>
-          Fyll ut skjemaet for å bli frivillig for forening DNT Oslo og Omegn. Alle felt merket med
-          <span className="required"> *</span> må fylles ut.
         </p>
         <div className="message info">
           Dette registreringsskjemaet er under utvikling. Det kan derfor oppstå feil, og
