@@ -84,7 +84,7 @@ function activitiesReducer(state, action) {
             id: curr.CrmId,
             name: curr.Name,
             isSelected: false,
-            description: 'Lorem',
+            description: curr.Description,
             where: whereOptions.reduce((acc2, curr2) => (
               {
                 ...acc2,
