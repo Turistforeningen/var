@@ -26,7 +26,7 @@ class Form extends Component {
   handleDobChange(date) {
     this.props.setField(
       'dob',
-      typeof date.format === 'function' ? date.format('YYYY-DD-MM') : date
+      typeof date.format === 'function' ? date.format('YYYY-MM-DD') : date
     );
   }
 
