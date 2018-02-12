@@ -165,7 +165,7 @@ export function sendRegistration(form) {
           City: data.city,
           MobilePhone: data.phone,
           Email: data.email,
-          DateOfBirth: data.dob || '',
+          DateOfBirth: data.dob ? `${data.dob}T12:00:00+01:00` : '',
         },
       };
 
