@@ -8,7 +8,7 @@ var-node:
   autoredeploy: true
   environment:
     - CRM_API_TIMEOUT=60000
-    - 'CRM_API_URL=http://pilotapi.dntoslo.no'
+    - 'CRM_API_URL=https://frivilligapi.dnt.no'
     - FORCE_SSL=true
     - HSTS_MAX_AGE=31536000
     - NODE_ENV=production

@@ -15,7 +15,7 @@ services:
         max-size: "500k"
     environment:
       - CRM_API_TIMEOUT=20000
-      - 'CRM_API_URL=http://pilotapi.dntoslo.no'
+      - 'CRM_API_URL=https://frivilligapi.dnt.no'
       - NODE_ENV=development
       - NPM_CONFIG_LOGLEVEL=info
       - NPM_CONFIG_PROGRESS=false
