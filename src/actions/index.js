@@ -143,20 +143,21 @@ export function sendRegistration(form) {
         CaseTypeCode: 2,
         Activity: Object.keys(data.activities)
           .filter(id => (data.activities[id].isSelected === true))
-          .map(id => (
-            {
+          .reduce((acc, id, index) => {
+            const activity = data.activities[id];
+
+            const selectedPlaces = Object.keys(activity.where)
+              .map(place => (activity.where[place]))
+              .filter(place => place.isSelected === true);
+
+            const activities = selectedPlaces.map(place => ({
               CrmId: id,
-              Name: data.activities[id].name,
-              Place: Object.keys(data.activities[id].where || {})
-                .filter(where => (
-                  data.activities[id].where[where].isSelected === true
-                ))
-                .map(where => (
-                  data.activities[id].where[where].name
-                ))
-                .join(', '),
-            }
-          )),
+              Name: activity.name,
+              Place: place.name,
+            }));
+
+            return [...acc, ...activities];
+          }, []),
         UserInfo: {
           FirstName: data.firstName,
           LastName: data.lastName,
