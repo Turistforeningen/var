@@ -26,8 +26,7 @@ class Registration extends Component {
           Velkommen skal du være!
         </p>
         <div className="message info">
-          Dette registreringsskjemaet er under utvikling. Det kan derfor oppstå feil, og
-          registreringer sendes foreløpig ikke noe sted.
+          Dette registreringsskjemaet er under uttesting og det kan derfor oppstå feil.
         </div>
         {
           this.props.app.isFetching &&
