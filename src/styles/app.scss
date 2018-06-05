@@ -187,8 +187,17 @@ textarea {
   width: 100%;
 }
 
-input[type="checkbox"] {
-  margin-right: 5px;
+div.checkbox {
+  label {
+    padding-left: 20px;
+    display: inline-block;
+
+    input[type="checkbox"] {
+      position: absolute;
+      margin-left: -20px;
+      margin-top: 5px;
+    }
+  }
 }
 
 .logo {
