@@ -22,6 +22,10 @@ export const registrationValidator = (data) => {
     errors.city = 'Sted må fylles ut';
   }
 
+  if (data.dob && /\d{4}-\d{2}-\d{2}/.test(data.dob) === false) {
+    errors.dob = 'Fødselsdato må fylles ut på formatet DD.MM.ÅÅÅÅ, f.eks. 19.12.1988';
+  }
+
   if (!data.consent) {
     errors.consent = 'Du må lese DNTs personvernerklæring og samtykke til at DNT kan lagre opplysninger';
   }
