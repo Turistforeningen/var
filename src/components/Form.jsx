@@ -30,6 +30,11 @@ class Form extends Component {
     );
   }
 
+  @autobind
+  handleConsentChange(e) {
+    this.props.setField('consent', e.target.checked);
+  }
+
   render() {
     const {app, form} = this.props;
     const isMobileDevice = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
@@ -125,6 +130,20 @@ class Form extends Component {
             value={form.email || ''}
             required
           />
+        </fieldset>
+        <fieldset>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" onChange={this.handleConsentChange} />
+              Jeg har lest <a href="https://www.dnt.no/personvern/" target="_blank">DNTs personvernerklæring</a>{' '}
+              og samtykker til at DNT kan lagre mine opplysninger så lenge jeg er{' '}
+              aktiv som frivillig for DNT.
+            </label>
+          </div>
+          {
+            form.errors.consent && form.validated &&
+            <div className="validation error">{form.errors.consent}</div>
+          }
         </fieldset>
         {
           !!Object.keys(form.errors).length && form.validated &&

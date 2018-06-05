@@ -22,6 +22,10 @@ export const registrationValidator = (data) => {
     errors.city = 'Sted må fylles ut';
   }
 
+  if (!data.consent) {
+    errors.consent = 'Du må lese DNTs personvernerklæring og samtykke til at DNT kan lagre opplysninger';
+  }
+
   const selectedActivities = Object.keys(data.activities || {}).filter(id => (
     data.activities[id].isSelected === true
   ));
