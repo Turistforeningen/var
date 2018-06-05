@@ -49,11 +49,7 @@ class Activity extends Component {
             {type.name}
           </label>
           {' '}
-          <a
-            onClick={this.toggleInfoIsVisible}
-            style={{color: '#147dcc', textDecoration: 'underline', cursor: 'pointer'}}
-          >
-
+          <a onClick={this.toggleInfoIsVisible}>
             {type.description && (infoIsVisible ? 'Skjul info' : 'Vis info')}
           </a>
         </div>
