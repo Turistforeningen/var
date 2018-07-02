@@ -3,6 +3,11 @@ box: node:7
 build:
   steps:
     - script:
+        name: create tag
+        code: |
+            export BUILD_TAG=${WERCKER_GIT_COMMIT:0:9}
+
+    - script:
         name: echo nodejs information
         code: |
           echo "node version $(node -v) running"
@@ -20,26 +25,18 @@ build:
         code: |
           npm run nsp
 
-  after-steps:
-    - turistforeningen/slack-notifier:
-        url: $SLACK_WEBHOOK_URL
-
-docker:
-  box: python:2
-  steps:
     - script:
-        name: docker stack update
+        name: write .build-tag file
         code: |
-          pip install docker-cloud
-          docker-cloud stack update $DOCKERCLOUD_STACK_NAME --sync
+            echo $BUILD_TAG > .build-tag
 
-    - script:
-        name: docker hub build
-        code: |
-          curl --verbose \
-            -H "Content-Type: application/json" \
-            -d "{\"source_type\": \"Branch\", \"source_name\": \"$WERCKER_GIT_BRANCH\"}" \
-            -X POST $DOCKER_TRIGGER_URL
+    - internal/docker-push:
+        username: $DOCKER_REGISTRY_USERNAME
+        password: $DOCKER_REGISTRY_PASSWORD
+        repository: turistforeningen/var
+        registry: https://registry.hub.docker.com/v2
+        tag: $BUILD_TAG
+        working-dir: /pipeline/source
 
   after-steps:
     - turistforeningen/slack-notifier:
