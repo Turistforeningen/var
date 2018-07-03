@@ -30,6 +30,11 @@ build:
         code: |
             echo $BUILD_TAG > .build-tag
 
+    - script:
+        name: build assets
+        code: |
+          npm run build
+
     - internal/docker-push:
         username: $DOCKER_REGISTRY_USERNAME
         password: $DOCKER_REGISTRY_PASSWORD
