@@ -42,6 +42,7 @@ build:
         registry: https://registry.hub.docker.com/v2
         tag: $BUILD_TAG
         working-dir: /pipeline/source
+        command: "node index.js"
 
   after-steps:
     - turistforeningen/slack-notifier:
