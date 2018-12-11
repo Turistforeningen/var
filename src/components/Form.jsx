@@ -49,14 +49,20 @@ class Form extends Component {
           </div>
         }
         <fieldset>
-          <h2>Hva vil du gjøre?</h2>
-          {form.data.activities && Object.keys(form.data.activities).map(id => (
-            <Activity key={id} type={form.data.activities[id]} />
-          ))}
-          {
-            form.errors.activities && form.validated &&
-            <div className="validation error">{form.errors.activities}</div>
-          }
+          <div className="activities">
+            <h2>Hva vil du gjøre?</h2>
+            <p>
+              Som ny kan du velge maks to frivilligaktiviteter, for å{' '}
+              sikre at vi klarer å gi deg en god start.
+            </p>
+            {form.data.activities && Object.keys(form.data.activities).map(id => (
+              <Activity key={id} type={form.data.activities[id]} />
+            ))}
+            {
+              form.errors.activities && (form.validated || form.touched.activities) &&
+              <div className="validation error">{form.errors.activities}</div>
+            }
+          </div>
 
           <h2>Kommentarer</h2>
           <div>

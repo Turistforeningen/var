@@ -35,7 +35,11 @@ export const registrationValidator = (data) => {
   ));
 
   if (selectedActivities.length < 1) {
-    errors.activities = 'Du må velge minst en aktivitet';
+    errors.activities = 'Du må velge minst én aktivitet';
+  }
+
+  if (selectedActivities.length > 2) {
+    errors.activities = 'Du kan ikke velge flere enn 2 aktiviteter';
   }
 
   errors.where = selectedActivities.reduce((acc, curr) => {

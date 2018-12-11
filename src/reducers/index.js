@@ -125,13 +125,13 @@ function activitiesReducer(state, action) {
 }
 
 function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, action) {
-  const data = {
-    ...state.data,
-    [action.field]: action.value,
-  };
-
   switch (action.type) {
-    case SET_FIELD:
+    case SET_FIELD: {
+      const data = {
+        ...state.data,
+        [action.field]: action.value,
+      };
+
       return {
         ...state,
         data: data,
@@ -141,18 +141,23 @@ function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, 
           [action.field]: true,
         },
       };
+    }
 
-    case SET_FORM_VALIDATION:
+    case SET_FORM_VALIDATION: {
+      const data = {
+        ...state.data,
+        [action.field]: action.value,
+      };
+
       return {
         ...state,
         data: data,
         errors: registrationValidator(data).errors,
         validated: true,
       };
+    }
 
     case RECEIVE_ACTIVITIES:
-    case TOGGLE_ACTIVITY:
-    case TOGGLE_WHERE:
       return {
         ...state,
         data: {
@@ -160,6 +165,24 @@ function formReducer(state = {data: {}, warnings: {}, errors: {}, touched: {}}, 
           activities: activitiesReducer(state.data.activities, action),
         },
       };
+
+    case TOGGLE_ACTIVITY:
+    case TOGGLE_WHERE: {
+      const data = {
+        ...state.data,
+        activities: activitiesReducer(state.data.activities, action),
+      };
+
+      return {
+        ...state,
+        data: data,
+        errors: registrationValidator(data).errors,
+        touched: {
+          ...state.touched,
+          activities: true,
+        },
+      };
+    }
 
     case RECEIVE_SEND:
       if (action.error) {
