@@ -11,19 +11,7 @@ class Registration extends Component {
         <p>
           Vil du være frivillig i DNT? Mesteparten av vårt tilbud{' '}
           gjennomføres takket være dugnadsinnsats – og vi vil gjerne ha{' '}
-          din hjelp! Som frivillig kan du bidra med mye; hyttedugnad,{' '}
-          merking av stier, turledelse og vertskap på  møter, foredrag{' '}
-          og utendørsarrangementer. Våre styrer og utvalg er også drevet{' '}
-          av frivillige. For mer informasjon om aktivitetene våre, se under.
-        </p>
-        <p>
-          Fyll ut kontaktinformasjon og ønsker i skjemaet under, så tar vi{' '}
-          kontakt med deg. Alle felt merket med{' '}
-          <span className="required">*</span>{' '}
-          må fylles ut.
-        </p>
-        <p>
-          Velkommen skal du være!
+          din hjelp!
         </p>
         <div className="message info">
           Dette registreringsskjemaet er under uttesting og det kan derfor oppstå feil.
