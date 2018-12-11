@@ -43,6 +43,10 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: 'DTL Nobel', sans-serif;
   margin-bottom: .5em;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 p {
@@ -95,7 +99,7 @@ a {
   max-width: 640px;
   float: none;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 15px;
 }
 
 div.required label:after, span.required {
